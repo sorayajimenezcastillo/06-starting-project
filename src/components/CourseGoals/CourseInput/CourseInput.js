@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Button from '../../UI/Button/Button';
-import './CourseInput.css';
-import styled from 'styled-components';
+import React, { useState } from "react";
+//import styled from "styled-components";
+import Button from "../../UI/Button/Button";
+import styles from "./CourseInput.module.css";
 
-const FromControl = styled.div`
+/* const FromControl = styled.div`
   margin: 0.5rem 0;
 
   & label {
@@ -29,21 +29,21 @@ const FromControl = styled.div`
   border-color: #8b005d;
 }
 `;
-
-const CourseInput = props => {
-  const [enteredValue, setEnteredValue] = useState('');
+ */
+const CourseInput = (props) => {
+  const [enteredValue, setEnteredValue] = useState("");
   const [isValid, setIsValid] = useState(true);
 
-  const goalInputChangeHandler = event => {
-    if(event.target.value.trim().length > 0) {
+  const goalInputChangeHandler = (event) => {
+    if (event.target.value.trim().length > 0) {
       setIsValid(true);
     }
     setEnteredValue(event.target.value);
   };
 
-  const formSubmitHandler = event => {
+  const formSubmitHandler = (event) => {
     event.preventDefault();
-    if(enteredValue.trim().length === 0) {
+    if (enteredValue.trim().length === 0) {
       setIsValid(false);
       return;
     }
@@ -52,10 +52,12 @@ const CourseInput = props => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <FromControl invalid={!isValid}>
+      {/* <FromControl invalid={!isValid}> */}
+      <div className={`${styles["form-control"]} ${!isValid && styles.invalid}`}>
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </FromControl>
+      </div>
+      {/* </FromControl> */}
       <Button type="submit">Add Goal</Button>
     </form>
   );
